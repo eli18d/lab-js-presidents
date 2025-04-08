@@ -471,9 +471,10 @@ function getAgeAtInauguration(presidentsArr) {
       // deathYear: president.deathYear,
       // tookOffice: president.tookOffice,
       // leftOffice: president.leftOffice,
-      // party: president.party, //
+      // party: president.party,             i dont need to write all that.  //
+
        ...president, ageAtInauguration: president.tookOffice - president.birthYear};
-});
+});         /* better use  "...president" to get all  properties of this object :D*/
 
 }
 
@@ -492,13 +493,22 @@ function getPresidentsBornAfter(presidentsArr, year) {
 
 // Bonus: Iteration 7 | Count Republican Presidents
 function countRepublicanPresidents(presidentsArr) {
-  return presidentsArr.reduce(function (acc, president) {
+  
+  /* return presidentsArr.reduce(function (acc, president) {
     if (president.party === "Republican") {
       return acc + 1;
     } else {
       return acc;
-    }
-  }, 0);
+    } 
+
+  }, 0);    */     
+
+  return presidentsArr.reduce(function (acc, president) {
+    if (president.party === "Republican") return acc + 1;
+    return acc;
+  }, 0);                      // cleaner B-)
+
+
 }
 
 
@@ -506,7 +516,7 @@ function countRepublicanPresidents(presidentsArr) {
 
 // Bonus: Iteration 8 | Sort Presidents by Name - `sort()`
 function sortPresidentsByName(presidentsArr) {
-  return presidentsArr.sort((a, b) => {
+ /*  return presidentsArr.sort((a, b) => {
     if (a.name < b.name) {
       return -1;
     } else if (a.name > b.name) {
@@ -514,5 +524,19 @@ function sortPresidentsByName(presidentsArr) {
     } else {
       return 0;
     }
-  });
+  });                       up here I sort directly from presidents but only looking at name-tags       */          
+
+  const sortNames = (a, b) => {
+    if (a < b) return -1
+    if (a > b) return 1;
+    return 0;                        // little house that filters things ^_^
+  }
+  
+ return presidentsArr.sort((a, b) => sortNames(a.name, b.name));   // I take the names from the array and put them in the little house and then sort them ^_^
+
+/* return presidentsArr.sort(function (a, b) {
+  return sortNames(a.name, b.name);
+}); */
+
+
 }
